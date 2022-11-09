@@ -1,0 +1,14 @@
+body {
+    background: rgb(54, 238, 57);
+}
+$hoverBackgroundColor:grey;
+
+.card{
+    &:hover{
+    background-color:$hoverBackgroundColor;
+    cursor: pointer;   
+    .card-title{
+        text-decoration: underline;
+    }
+}
+}
