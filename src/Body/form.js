@@ -10,6 +10,11 @@ function FromComponent({ show, handleClose }) {
         { label: 'Germany', code: 'de' },
         { label: 'Franch', code: 'fr' },
     ];
+
+    function upperText(text) {
+        return text.charAt(0).toUpperCase() + text.slice(1);
+    };
+  
     return (
 
         <Offcanvas show={show} onHide={handleClose}>
@@ -19,25 +24,26 @@ function FromComponent({ show, handleClose }) {
             <Offcanvas.Body>
                 <Form>
                     <Form.Group className="mb-3">
-                        <Form.Label>Keywords</Form.Label>
+                        <Form.Label >Keywords</Form.Label>
                         <Form.Control type="email" placeholder="Enter keywords or phrases" />
                         <Form.Text className="text-muted">
                             Advanced search is supported.
                         </Form.Text>
                     </Form.Group>
-                    {['title', 'description', 'content'].map((type) => (
-                        <div key={`${type}`} className="mb-3">
+                    {['title', 'description', 'content'].map((titleName) => (
+                        <div key={`${titleName}`} className="mb-3">
                             <Form.Check
-                                label={type}
+                                label={upperText(titleName)}
                                 name="searchIn"
                                 type="checkbox"
-                                id={`inline-${type}-1`}
+                                id={`inline-${titleName}-1`}
                             />
                         </div>
                     ))}
                     <Form.Group className="mb-3">
                         <Form.Label>From-to</Form.Label>
                         <InputGroup className="mb-3">
+
                             <InputGroup.Text></InputGroup.Text>
                             <Form.Control aria-label="from" />
                             <Form.Control aria-label="to" />
@@ -46,17 +52,18 @@ function FromComponent({ show, handleClose }) {
                     <Form.Group className="mb-3">
                         <Form.Label>Select Language</Form.Label>
                         <Form.Select>
-                        {languages.map((lang)=>(
-                            <option>{lang.label}</option>
-                        ))}
+                            {languages.map((lang) => (
+                                <option>{lang.label}</option>
+                            ))}
                         </Form.Select>
                     </Form.Group>
-                    <Button variant="primary" type="submit" className ="w-100">
+                    <Button variant="primary" type="submit" className="w-100">
                         Search
                     </Button>
                 </Form>
             </Offcanvas.Body>
         </Offcanvas>
-    );
+         
+                            );
 }
 export default FromComponent;
