@@ -9,7 +9,8 @@ import { getEverything } from '../../Services/apiServices';
 import 'react-datepicker/dist/react-datepicker.css';
 
 
-function FromComponent({ show, handleClose,setFormResponse}) {
+
+function FromComponent({ show, handleClose,setFormResponse,searchProps}) {
     const [startDateFrom, setStartDateFrom] = useState(new Date());
     const [startDateTo, setStartDateTo] = useState(new Date());
     const dateFormat ="dd.MM.yyyy";
@@ -55,7 +56,8 @@ function FromComponent({ show, handleClose,setFormResponse}) {
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
                         <Form.Label >Keywords</Form.Label>
-                        <Form.Control type="email" name="q" placeholder="Enter keywords or phrases" />
+                        <Form.Control type="text" name="q" placeholder="Enter keywords or phrases" defaultValue ={searchProps.q} />
+
                         <Form.Text className="text-muted">
                             Advanced search is supported.
                         </Form.Text>
@@ -68,6 +70,7 @@ function FromComponent({ show, handleClose,setFormResponse}) {
                                 type="checkbox"
                                 value={titleName}
                                 id={`inline-${titleName}-1`}
+                                defaultChecked = {searchProps.searchIn.includes(titleName)}
                             />
                         </div>
                     ))}
@@ -92,7 +95,7 @@ function FromComponent({ show, handleClose,setFormResponse}) {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Select Language</Form.Label>
-                        <Form.Select name="language">
+                        <Form.Select name="language" defaultValue = {searchProps.language}>
                             {languages.map((lang) => (
                                 <option key={lang.code} value={lang.code}>{lang.label}</option>
                             ))}
