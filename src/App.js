@@ -7,6 +7,7 @@ import HeaderComponent from './Header';
 import PaginationComponent from './Footer';
 
 
+
 function App() {
   return (
     <Container>

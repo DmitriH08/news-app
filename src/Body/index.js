@@ -46,7 +46,7 @@ function NewsGroupComponent(props) {
   );
 }
 NewsGroupComponent.defaultProps = {
-  q: 'Авто',
+  q: 'Sport',
   from: moment().format("YYYY-MM-DDT00:00:000"),
   to: moment().format("YYYY-MM-DDT23:59:59.999"),
   language: 'ru',
