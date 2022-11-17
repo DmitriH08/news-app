@@ -16,7 +16,7 @@ function NewsCardComponent({article}) {
           <Card.Text className="Text">
             {article.content}
             </Card.Text>
-          <Card.Text dangerouslySetInnerHtml = {{ __html:article.description}}></Card.Text>
+          <Card.Text dangerouslySetInnerHTML = {{ __html:article.description}}></Card.Text>
           {article.author ? (
           <blockquote className="blockquote mb-0">
             <footer className="blockquote-footer">

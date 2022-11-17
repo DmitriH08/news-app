@@ -22,7 +22,7 @@ function NewsGroupComponent(props) {
       setFormResponse(responseData);
     })();
 
-  },[]);
+  },[props]);
 
   return (
     <>
