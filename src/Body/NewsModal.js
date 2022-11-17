@@ -35,7 +35,7 @@ function NewsModalComponent({ setShow, show, article }) {
             Close
           </Button>
           <Button variant="primary" onClick={handleOpen}>
-            Open
+            Read More
           </Button>
         </Modal.Footer>
       </Modal>
