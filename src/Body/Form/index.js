@@ -10,7 +10,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 
 
-function FromComponent({ show, handleClose,setFormResponse,searchProps}) {
+function FromComponent({ show, handleClose,setArticles,searchProps}) {
     const [startDateFrom, setStartDateFrom] = useState(new Date());
     const [startDateTo, setStartDateTo] = useState(new Date());
     const dateFormat ="dd.MM.yyyy";
@@ -35,7 +35,7 @@ function FromComponent({ show, handleClose,setFormResponse,searchProps}) {
             to: moment(startDateTo).format("YYYY-MM-DDT23:59:59.999"),
             language: event.target.language.value,
             searchIn: [...event.target.searchIn].filter(input => input.checked).map(input => input.value).join(','),
-        }
+        };
 
         if(moment(data.from).isAfter(data.to)){
             alert("Wrong data from");
@@ -43,7 +43,7 @@ function FromComponent({ show, handleClose,setFormResponse,searchProps}) {
         }
         const response = await getEverything(data);
         const responseData = await response.json();
-        setFormResponse(responseData);
+        setArticles(responseData.articles);
 
     }
     return (
@@ -56,7 +56,11 @@ function FromComponent({ show, handleClose,setFormResponse,searchProps}) {
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
                         <Form.Label >Keywords</Form.Label>
-                        <Form.Control type="text" name="q" placeholder="Enter keywords or phrases" defaultValue ={searchProps.q} />
+                        <Form.Control 
+                        type="text"
+                        name="q" 
+                        placeholder="Enter keywords or phrases"
+                        defaultValue ={searchProps.q} />
 
                         <Form.Text className="text-muted">
                             Advanced search is supported.

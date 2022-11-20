@@ -35,6 +35,7 @@ function NewsModalComponent({ setShow, show, article }) {
             Close
           </Button>
           <Button variant="primary" onClick={handleOpen}>
+          {/* <Button variant="primary" href={article.url} target = "_blank"> - kak variant */}
             Read More
           </Button>
         </Modal.Footer>

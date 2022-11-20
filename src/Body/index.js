@@ -4,25 +4,36 @@ import NewsCardComponent from './NewsCard';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import FromComponent from './Form';
-import moment from 'moment';
 import './News.scss'
+import { useDispatch } from 'react-redux';
 import { getEverything } from '../Services/apiServices';
+import { setErrorMessage } from '../Services/stateService';
 
 function NewsGroupComponent(props) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
-  const [formResponse, setFormResponse] = useState(null);
+  const [articles, setArticles] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    (async function(){
-      const response = await getEverything(props);
-      const responseData = await response.json();
-      setFormResponse(responseData);
+    (async function () {
+      try {
+        const response = await getEverything(props);
+        const responseData = await response.json();
+        if (responseData.status === 'error') {
+          throw responseData;
+        }
+        setArticles(responseData.articles);
+      }
+      catch (error) {
+        dispatch(setErrorMessage(error.message));
+      }
+
     })();
 
-  },[props]);
+  }, [props, dispatch]);
 
   return (
     <>
@@ -30,29 +41,20 @@ function NewsGroupComponent(props) {
         Launch
       </Button>
       <Row xs={1} md={2} lg={3} className="g-2">
-        {formResponse?.articles.map((article, idx) => (
+        {articles.map((article, idx) => (
           <Col key={idx}>
             <NewsCardComponent article={article} />
           </Col>
         ))}
       </Row>
-      <FromComponent 
-      show = {show} 
-      handleClose = {handleClose} 
-      setFormResponse = {setFormResponse}
-      searchProps = {props}
+      <FromComponent
+        show={show}
+        handleClose={handleClose}
+        setArticles={setArticles}
+        searchProps={props}
       />
     </>
   );
 }
-NewsGroupComponent.defaultProps = {
-  q: 'Sport',
-  from: moment().format("YYYY-MM-DDT00:00:000"),
-  to: moment().format("YYYY-MM-DDT23:59:59.999"),
-  language: 'ru',
-  searchIn: 'title,description,content',
-  pageSize: 12, 
-  page: 1,
 
-}
 export default NewsGroupComponent;
