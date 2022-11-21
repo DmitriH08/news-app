@@ -7,9 +7,10 @@ import FromComponent from './Form';
 import './News.scss'
 import { useDispatch } from 'react-redux';
 import { getEverything } from '../Services/apiServices';
-import { setErrorMessage } from '../Services/stateService';
+import { setErrorMessage,setTotalResults } from '../Services/stateService';
+import { useSelector } from 'react-redux';
 
-function NewsGroupComponent(props) {
+function NewsGroupComponent() {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -17,15 +18,18 @@ function NewsGroupComponent(props) {
   const [articles, setArticles] = useState([]);
   const dispatch = useDispatch();
 
+  const searchParams = useSelector((state) => state.searchParams);
+
   useEffect(() => {
     (async function () {
       try {
-        const response = await getEverything(props);
+        const response = await getEverything(searchParams);
         const responseData = await response.json();
         if (responseData.status === 'error') {
           throw responseData;
         }
         setArticles(responseData.articles);
+        dispatch(setTotalResults(responseData.totalResults));
       }
       catch (error) {
         dispatch(setErrorMessage(error.message));
@@ -33,7 +37,7 @@ function NewsGroupComponent(props) {
 
     })();
 
-  }, [props, dispatch]);
+  }, [searchParams, dispatch]);
 
   return (
     <>
@@ -51,7 +55,7 @@ function NewsGroupComponent(props) {
         show={show}
         handleClose={handleClose}
         setArticles={setArticles}
-        searchProps={props}
+        searchProps={searchParams}
       />
     </>
   );

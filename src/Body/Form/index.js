@@ -5,11 +5,10 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import DatePicker from 'react-datepicker';
 import moment from 'moment'
-import { useSelector } from 'react-redux';
-import { setDefProps } from './Services/stateService';
 import { getEverything } from '../../Services/apiServices';
+import { setPage } from '../../Services/stateService';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { useSelector,useDispatch } from 'react-redux'; 
 
 
 function FromComponent({ show, handleClose,setArticles,searchProps}) {
@@ -17,17 +16,14 @@ function FromComponent({ show, handleClose,setArticles,searchProps}) {
     const [startDateFrom, setStartDateFrom] = useState(new Date());
     const [startDateTo, setStartDateTo] = useState(new Date());
     const dateFormat ="dd.MM.yyyy";
-    // const dateFormatMoment = "DD-MM-YYYY";
+    const pageSize = useSelector((state) => state.searchParams.pageSize);
+    const dispatch = useDispatch();
     const languages = [
         { label: 'English', code: 'en' },
         { label: 'Russian', code: 'ru' },
         { label: 'Germany', code: 'de' },
         { label: 'Franch', code: 'fr' },
     ];
-    // const setDefProps = useSelector((state) => state.language);
-
-function handleClose(){
-        (setDefProps())};
 
     function upperText(text) {
         return text.charAt(0).toUpperCase() + text.slice(1);
@@ -42,16 +38,20 @@ function handleClose(){
             to: moment(startDateTo).format("YYYY-MM-DDT23:59:59.999"),
             language: event.target.language.value,
             searchIn: [...event.target.searchIn].filter(input => input.checked).map(input => input.value).join(','),
+            pageSize,
         };
 
         if(moment(data.from).isAfter(data.to)){
             alert("Wrong data from");
             return;
         }
+
+
         const response = await getEverything(data);
         const responseData = await response.json();
         setArticles(responseData.articles);
-
+        dispatch(setPage(1));
+        handleClose();
     }
     return (
 
@@ -121,4 +121,5 @@ function handleClose(){
 
     );
 }
+
 export default FromComponent;
