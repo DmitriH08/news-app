@@ -5,12 +5,15 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import DatePicker from 'react-datepicker';
 import moment from 'moment'
+import { useSelector } from 'react-redux';
+import { setDefProps } from './Services/stateService';
 import { getEverything } from '../../Services/apiServices';
 import 'react-datepicker/dist/react-datepicker.css';
 
 
 
 function FromComponent({ show, handleClose,setArticles,searchProps}) {
+
     const [startDateFrom, setStartDateFrom] = useState(new Date());
     const [startDateTo, setStartDateTo] = useState(new Date());
     const dateFormat ="dd.MM.yyyy";
@@ -21,6 +24,10 @@ function FromComponent({ show, handleClose,setArticles,searchProps}) {
         { label: 'Germany', code: 'de' },
         { label: 'Franch', code: 'fr' },
     ];
+    // const setDefProps = useSelector((state) => state.language);
+
+function handleClose(){
+        (setDefProps())};
 
     function upperText(text) {
         return text.charAt(0).toUpperCase() + text.slice(1);

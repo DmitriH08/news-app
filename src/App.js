@@ -21,15 +21,15 @@ function App(props) {
     </Container>
   );
 }
-App.defaultProps = {
-  q: 'Sport',
-  from: moment().format("YYYY-MM-DDT00:00:000"),
-  to: moment().format("YYYY-MM-DDT23:59:59.999"),
-  language: 'ru',
-  searchIn: 'title,description,content',
-  pageSize: 12, 
-  page: 1,
+// App.defaultProps = {
+//   q: 'Sport',
+//   from: moment().format("YYYY-MM-DDT00:00:000"),
+//   to: moment().format("YYYY-MM-DDT23:59:59.999"),
+//   language: 'ru',
+//   searchIn: 'title,description,content',
+//   pageSize: 12, 
+//   page: 1,
 
-}
+// }
 
 export default App;
