@@ -5,14 +5,13 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import DatePicker from 'react-datepicker';
 import moment from 'moment'
-import { getEverything } from '../../Services/apiServices';
-import { setPage } from '../../Services/stateService';
+import {setErrorMessage, setSearchParams } from '../../Services/stateService';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useSelector,useDispatch } from 'react-redux'; 
-import  ErrorModalComponent  from '../../ErrorModal';
 
 
-function FromComponent({ show, handleClose,setArticles,searchProps}) {
+
+function FromComponent({ show, handleClose,searchProps}) {
 
     const [startDateFrom, setStartDateFrom] = useState(new Date());
     const [startDateTo, setStartDateTo] = useState(new Date());
@@ -35,23 +34,23 @@ function FromComponent({ show, handleClose,setArticles,searchProps}) {
         //console.log(event.target.from.value) - chtobi iskat po znacheniju
         const data = {
             q: event.target.q.value,
-            from: moment(startDateFrom).format("YYYY-MM-DDT00:00:000"),
+            from: moment(startDateFrom).format("YYYY-MM-DDT00:00:00.000"),
             to: moment(startDateTo).format("YYYY-MM-DDT23:59:59.999"),
             language: event.target.language.value,
             searchIn: [...event.target.searchIn].filter(input => input.checked).map(input => input.value).join(','),
             pageSize,
+            page:1,
         };
 
+
         if(moment(data.from).isAfter(data.to)){
-           ErrorModalComponent(); 
+          dispatch(setErrorMessage("Wrong data from"));
             return;
         }
 
 
-        const response = await getEverything(data);
-        const responseData = await response.json();
-        setArticles(responseData.articles);
-        dispatch(setPage(1));
+        
+        dispatch(setSearchParams(data));
         handleClose();
     }
     return (

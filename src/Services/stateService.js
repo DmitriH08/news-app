@@ -19,7 +19,7 @@ const initialState = {
 export const setErrorMessage = createAction("setErrorMessage");
 export const setPage = createAction("setPage");
 export const setTotalResults = createAction("setTotalResults");
-
+export const setSearchParams = createAction("setSearchParams");
 const reducer = createReducer(initialState,{
     [setErrorMessage]: (state, action) => {
         state.errorMessage = action.payload;
@@ -29,6 +29,9 @@ const reducer = createReducer(initialState,{
     },
     [setTotalResults]:(state,action) =>{
         state.totalResults = action.payload;
+    },
+    [setSearchParams]:(state,action) => {
+        state.searchParams = action.payload;
     }
 });
 
