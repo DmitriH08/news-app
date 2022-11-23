@@ -9,6 +9,7 @@ import { getEverything } from '../../Services/apiServices';
 import { setPage } from '../../Services/stateService';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useSelector,useDispatch } from 'react-redux'; 
+import  ErrorModalComponent  from '../../ErrorModal';
 
 
 function FromComponent({ show, handleClose,setArticles,searchProps}) {
@@ -42,7 +43,7 @@ function FromComponent({ show, handleClose,setArticles,searchProps}) {
         };
 
         if(moment(data.from).isAfter(data.to)){
-            alert("Wrong data from");
+           ErrorModalComponent(); 
             return;
         }
 
