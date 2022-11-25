@@ -9,6 +9,7 @@ import PaginationComponent from './Footer';
 import ErrorModalComponent from './ErrorModal';
 import ContactComponent from './Body/Contact';
 import {Routes, Route} from 'react-router-dom';
+import School from './Body/School';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <>
         <NewsGroupComponent />
         <PaginationComponent />
+        <School />
         </>
       }/>
               <Route path = "/:q" element = {
@@ -34,9 +36,17 @@ function App() {
         <PaginationComponent />
         </>
       }/>
+               <Route path = "/contact/School" element = {
+        <>
+        <School />
+       
+        </>
+      }/>
+
         <Route path = "/contact" element = {<ContactComponent />}/>
       </Routes>
       
+
       <ErrorModalComponent /> 
     </Container>
   );
