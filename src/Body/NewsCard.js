@@ -4,7 +4,16 @@ import noImage from '../dummy-post-horisontal.jpg';
 import NewsModalComponent from './NewsModal';
 import moment from 'moment';
 function NewsCardComponent({article}) {
+  // useState eto funktsija/hook kotoraja pomogaet rabotat s sostojaniem komponenta
+  // Sostojanie eto informacija kotoruju komponent soderzit v sebe
+  // Pri izmenenii sostojanija zapuskaetsa novaja otrisovka/render komponenta.
+  // U kazdogo sostojanija est svoe iznachalnoe znachenie i funktsija kotoraja menjaet eto znachenie,
+  // useState prinimaet kak argument ili props iznachalno znachenie sostojanija i vidaet massiv s dvumja znachenijami
+  // 1 : iznachalnoe sostojanie  ( v nashem sluchae - false)
+  // 2 : funktciju dlja izmenenija sostojanija 
   const [show, setShow] = useState(false);
+  // Card component eto komponent iz npm paket react - bootsrtap,
+  //  react - bootsrtap eto bibleoteka s gotovimi react komponentami napisannimi s ispolzovaniem bootstrap css toolkit. 
   return (
     <>
 

@@ -2,6 +2,11 @@ import Figure from 'react-bootstrap/Figure';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import noImage from '../dummy-post-horisontal.jpg';
+
+// Kak i ljubaja funktsija v Js takze i komponenti prinemajut props (properties).
+// Komponent mozet prinjat beskonechnoe kol-vo properties, no hranit on ih vseh v odnoj peremennoj v kachestve objecta
+// Propsi peredajutsa v komponent takze kak html element mi peredaem atributi (id,value,class i t.d). (<Component prop1 = {1} porp2= {2} />)
+// V komponente Props ne mogut menjatsa
 function NewsModalComponent({ setShow, show, article }) {
 
   const handleClose = () => setShow(false);

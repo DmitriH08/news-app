@@ -28,7 +28,18 @@ function FromComponent({ show, handleClose,searchProps}) {
     function upperText(text) {
         return text.charAt(0).toUpperCase() + text.slice(1);
     };
+    // Sobitija eto vzaimodejstvie mezdu polzovatelem  i nawem prilozeniem
+    // Polzovatel chtoto -delaet v brauzere, brauzer lovit eti dvizenija i peredaet ifo nawemu prilozeniju
+    // V zavisimosti ot triggerov nawe prilzenije obrabativaet poluchdnnie dannie
+    // Triggeri bivajut raznie, naprimer trigger pri nazatii knopki miwki, nazivaetsa onClick
+    // Trigerri vewajutsa na elementi za kotorimi mi hotim sledit
+    // Trigeri zapuskajut obrabotchiki
+    // Obrabotchiki eto obichnie funktsii
+    // Brauzer peredaet nawim obrabotchikam polnij otchet o dejstvii / sobitii v vide objecta DOM
+    // Glavnoe svojstvo etogo objecta javlaetsa 'target' v kotorm hranitsa info ob elemente nad kotorim proizowlo sobitie
    async function handleSubmit(event) {
+    // preventDefault eta funktsija zastovljaet brauzer prekratit 'vipolnja' izvestnoe jemu dejstvie etogo sobitija
+    // v nawem sluchae eto zastavljaet otmenit o tpravku dannih na server.
         event.preventDefault();
         console.log(event.target.from)
         //console.log(event.target.from.value) - chtobi iskat po znacheniju
