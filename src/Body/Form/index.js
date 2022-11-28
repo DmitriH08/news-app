@@ -1,37 +1,46 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import DatePicker from 'react-datepicker';
 import moment from 'moment'
-import {setErrorMessage, setSearchParams } from '../../Services/stateService';
+import {setErrorMessage, setSearchParams} from '../../Services/stateService';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useSelector,useDispatch } from 'react-redux'; 
+import {useDispatch, useSelector} from 'react-redux';
+import {getSources} from "../../Services/apiServices";
 
 
-
-function FromComponent({ show, handleClose,searchProps}) {
+function FromComponent({show, handleClose, searchProps}) {
+    getSourceData();
 
     const [startDateFrom, setStartDateFrom] = useState(new Date());
     const [startDateTo, setStartDateTo] = useState(new Date());
-    const dateFormat ="dd.MM.yyyy";
+    const [sourcesValues, setSourcesValues] = useState([]);
+    const dateFormat = "dd.MM.yyyy";
     const pageSize = useSelector((state) => state.searchParams.pageSize);
     const dispatch = useDispatch();
     const languages = [
-        { label: 'English', code: 'en' },
-        { label: 'Russian', code: 'ru' },
-        { label: 'Germany', code: 'de' },
-        { label: 'Franch', code: 'fr' },
+        {label: 'English', code: 'en'},
+        {label: 'Russian', code: 'ru'},
+        {label: 'Germany', code: 'de'},
+        {label: 'Franch', code: 'fr'},
     ];
+
+    function getSourceData() {
+        // getSources().then(async (res) => {
+        //     const sources = await res.json();
+        //     const values = sources.sources.map((source) => source.name);
+        //     setSourcesValues(values);
+        // });
+    }
 
     function upperText(text) {
         return text.charAt(0).toUpperCase() + text.slice(1);
     };
-   async function handleSubmit(event) {
+
+    async function handleSubmit(event) {
         event.preventDefault();
-        console.log(event.target.from)
-        //console.log(event.target.from.value) - chtobi iskat po znacheniju
         const data = {
             q: event.target.q.value,
             from: moment(startDateFrom).format("YYYY-MM-DDT00:00:00.000"),
@@ -39,20 +48,20 @@ function FromComponent({ show, handleClose,searchProps}) {
             language: event.target.language.value,
             searchIn: [...event.target.searchIn].filter(input => input.checked).map(input => input.value).join(','),
             pageSize,
-            page:1,
+            page: 1,
         };
 
 
-        if(moment(data.from).isAfter(data.to)){
-          dispatch(setErrorMessage("Wrong data from"));
+        if (moment(data.from).isAfter(data.to)) {
+            dispatch(setErrorMessage("Wrong data from"));
             return;
         }
 
 
-        
         dispatch(setSearchParams(data));
         handleClose();
     }
+
     return (
 
         <Offcanvas show={show} onHide={handleClose}>
@@ -62,22 +71,21 @@ function FromComponent({ show, handleClose,searchProps}) {
             <Offcanvas.Body>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
-                        <Form.Label >Keywords</Form.Label>
-                        <Form.Control 
-                        type="text"
-                        name="q" 
-                        placeholder="Enter keywords or phrases"
-                        defaultValue ={searchProps.q} />
+                        <Form.Label>Keywords</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="q"
+                            placeholder="Enter keywords or phrases"
+                            defaultValue={searchProps.q}/>
 
                         <Form.Text className="text-muted">
                             Advanced search is supported.
                         </Form.Text>
-                        <Form.Select aria-label="Default select example" >
-                            <option>Open this select menu</option>
-                            <option value="BBC News">BBC News</option>
-                            <option value="CNN News">CNN News</option>
-                            <option value="Bloomberg">Bloomberg</option>
-                            </Form.Select>
+                        <Form.Select aria-label="Default select example" defaultValue={sourcesValues[0]}>
+                            {sourcesValues.map((value) => (
+                                <option key={value} value={value}>{value}</option>
+                            ))}
+                        </Form.Select>
                     </Form.Group>
                     {['title', 'description', 'content'].map((titleName) => (
                         <div key={`${titleName}`} className="mb-3">
@@ -87,7 +95,7 @@ function FromComponent({ show, handleClose,searchProps}) {
                                 type="checkbox"
                                 value={titleName}
                                 id={`inline-${titleName}-1`}
-                                defaultChecked = {searchProps.searchIn.includes(titleName)}
+                                defaultChecked={searchProps.searchIn.includes(titleName)}
                             />
                         </div>
                     ))}
@@ -112,7 +120,7 @@ function FromComponent({ show, handleClose,searchProps}) {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Select Language</Form.Label>
-                        <Form.Select name="language" defaultValue = {searchProps.language}>
+                        <Form.Select name="language" defaultValue={searchProps.language}>
                             {languages.map((lang) => (
                                 <option key={lang.code} value={lang.code}>{lang.label}</option>
                             ))}

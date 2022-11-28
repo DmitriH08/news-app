@@ -16,3 +16,7 @@ export async function getEverything(data){
 //     });
 //     return  await fetch (`${apiUrl}/v2/top-headlines/sources?${params}`);
 // }
+
+export async function getSources() {
+    return await fetch (`${apiUrl}/v2/top-headlines/sources?apiKey=2d5debd860354c8fa67d4458c2ad9578`);
+}
