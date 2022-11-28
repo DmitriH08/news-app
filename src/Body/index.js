@@ -22,7 +22,7 @@ function NewsGroupComponent() {
   const searchParams = useSelector((state) => state.searchParams);
   const {q, lang} = useParams();
   console.log('q',q);
-
+  const {School} = useParams();
   useEffect(() => {
     if (lang && searchParams.language !== lang){
       dispatch(setSearchParams({   
@@ -36,6 +36,7 @@ function NewsGroupComponent() {
         const response = await getEverything({
           ...searchParams,
           q:q || searchParams.q,
+          
         });
         const responseData = await response.json();
         if (responseData.status === 'error') {
@@ -50,7 +51,7 @@ function NewsGroupComponent() {
 
     })();
 
-  }, [searchParams, dispatch,q,lang]);
+  }, [searchParams, dispatch,q,lang,School]);
 
   return (
     <>

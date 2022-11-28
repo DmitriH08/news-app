@@ -21,7 +21,7 @@ function App() {
         <>
         <NewsGroupComponent />
         <PaginationComponent />
-        <School />
+      
         </>
       }/>
               <Route path = "/:q" element = {
@@ -38,6 +38,7 @@ function App() {
       }/>
                <Route path = "/contact/School" element = {
         <>
+       
         <School />
        
         </>

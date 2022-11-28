@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
 function ContactComponent() {
-
+// const {School} = useParams();
     return (
         <div>
             <Card style={{ width: '18rem' }}>

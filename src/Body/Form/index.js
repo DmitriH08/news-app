@@ -72,6 +72,12 @@ function FromComponent({ show, handleClose,searchProps}) {
                         <Form.Text className="text-muted">
                             Advanced search is supported.
                         </Form.Text>
+                        <Form.Select aria-label="Default select example" >
+                            <option>Open this select menu</option>
+                            <option value="BBC News">BBC News</option>
+                            <option value="CNN News">CNN News</option>
+                            <option value="Bloomberg">Bloomberg</option>
+                            </Form.Select>
                     </Form.Group>
                     {['title', 'description', 'content'].map((titleName) => (
                         <div key={`${titleName}`} className="mb-3">
