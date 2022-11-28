@@ -8,15 +8,12 @@ import moment from 'moment'
 import {setErrorMessage, setSearchParams} from '../../Services/stateService';
 import 'react-datepicker/dist/react-datepicker.css';
 import {useDispatch, useSelector} from 'react-redux';
-import {getSources} from "../../Services/apiServices";
 
 
-function FromComponent({show, handleClose, searchProps}) {
-    getSourceData();
+function FromComponent({show, handleClose, searchProps, sources}) {
 
     const [startDateFrom, setStartDateFrom] = useState(new Date());
     const [startDateTo, setStartDateTo] = useState(new Date());
-    const [sourcesValues, setSourcesValues] = useState([]);
     const dateFormat = "dd.MM.yyyy";
     const pageSize = useSelector((state) => state.searchParams.pageSize);
     const dispatch = useDispatch();
@@ -26,14 +23,6 @@ function FromComponent({show, handleClose, searchProps}) {
         {label: 'Germany', code: 'de'},
         {label: 'Franch', code: 'fr'},
     ];
-
-    function getSourceData() {
-        // getSources().then(async (res) => {
-        //     const sources = await res.json();
-        //     const values = sources.sources.map((source) => source.name);
-        //     setSourcesValues(values);
-        // });
-    }
 
     function upperText(text) {
         return text.charAt(0).toUpperCase() + text.slice(1);
@@ -81,8 +70,8 @@ function FromComponent({show, handleClose, searchProps}) {
                         <Form.Text className="text-muted">
                             Advanced search is supported.
                         </Form.Text>
-                        <Form.Select aria-label="Default select example" defaultValue={sourcesValues[0]}>
-                            {sourcesValues.map((value) => (
+                        <Form.Select aria-label="Default select example" defaultValue={sources[0]}>
+                            {sources.map((value) => (
                                 <option key={value} value={value}>{value}</option>
                             ))}
                         </Form.Select>
