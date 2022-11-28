@@ -3,17 +3,17 @@ import moment from 'moment';
 
 const pageSize = 12;
 const initialState = {
-     errorMessage: null,
-     totalResults: pageSize,
-     searchParams:{ 
-    q: 'Sport',
-    from: moment().format("YYYY-MM-DDT00:00:000"),
-    to: moment().format("YYYY-MM-DDT23:59:59.999"),
-    language: 'ru',
-    searchIn: 'title,description,content',
-    pageSize,
-    page: 1,
-     } 
+    errorMessage: null,
+    totalResults: pageSize,
+    searchParams: {
+        q: 'Sport',
+        from: moment().format("YYYY-MM-DDT00:00:000"),
+        to: moment().format("YYYY-MM-DDT23:59:59.999"),
+        language: 'ru',
+        searchIn: 'title,description,content',
+        pageSize,
+        page: 1
+    }
 };
 
 export const setErrorMessage = createAction("setErrorMessage");

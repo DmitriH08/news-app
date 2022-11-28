@@ -11,7 +11,6 @@ import {useDispatch, useSelector} from 'react-redux';
 
 
 function FromComponent({show, handleClose, searchProps, sources}) {
-
     const [startDateFrom, setStartDateFrom] = useState(new Date());
     const [startDateTo, setStartDateTo] = useState(new Date());
     const dateFormat = "dd.MM.yyyy";
@@ -29,6 +28,7 @@ function FromComponent({show, handleClose, searchProps, sources}) {
     };
 
     async function handleSubmit(event) {
+        console.log(event.target.source);
         event.preventDefault();
         const data = {
             q: event.target.q.value,
@@ -38,6 +38,10 @@ function FromComponent({show, handleClose, searchProps, sources}) {
             searchIn: [...event.target.searchIn].filter(input => input.checked).map(input => input.value).join(','),
             pageSize,
             page: 1,
+            source: {
+                id: event.target.source.value.id,
+                name: event.target.source.value.name
+            }
         };
 
 
@@ -70,9 +74,9 @@ function FromComponent({show, handleClose, searchProps, sources}) {
                         <Form.Text className="text-muted">
                             Advanced search is supported.
                         </Form.Text>
-                        <Form.Select aria-label="Default select example" defaultValue={sources[0]}>
+                        <Form.Select name="source" aria-label="Default select example" defaultValue={sources[0]}>
                             {sources.map((value) => (
-                                <option key={value} value={value}>{value}</option>
+                                <option key={value.id} value={value.name}>{value.name}</option>
                             ))}
                         </Form.Select>
                     </Form.Group>
