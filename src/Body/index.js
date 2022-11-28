@@ -58,7 +58,8 @@ function NewsGroupComponent() {
       try {
         const response = await getSources();
         const responseData = await response.json();
-        setSourcesValues(responseData.sources);
+        const categories = responseData.sources.map((el) => el.category)
+        setSourcesValues(categories);
       }
       catch (e) {
         console.log('Error')

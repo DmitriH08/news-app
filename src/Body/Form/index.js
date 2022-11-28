@@ -76,7 +76,7 @@ function FromComponent({show, handleClose, searchProps, sources}) {
                         </Form.Text>
                         <Form.Select name="source" aria-label="Default select example" defaultValue={sources[0]}>
                             {sources.map((value) => (
-                                <option key={value.id} value={value.name}>{value.name}</option>
+                                <option key={value} value={value}>{value}</option>
                             ))}
                         </Form.Select>
                     </Form.Group>
