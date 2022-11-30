@@ -24,8 +24,9 @@ function NewsGroupComponent() {
   const {q, lang} = useParams();
   const {School} = useParams();
 
+
   useEffect(() => {
-    if (lang && searchParams.language !== lang){
+    if (lang && searchParams.language !== lang){S
       dispatch(setSearchParams({   
         ...searchParams,
         language: lang,
