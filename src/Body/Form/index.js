@@ -28,7 +28,7 @@ function FromComponent({show, handleClose, searchProps, sources}) {
     };
 
     async function handleSubmit(event) {
-        console.log(event.target.source);
+        console.log(event.target.source.value)
         event.preventDefault();
         const data = {
             q: event.target.q.value,
@@ -37,7 +37,8 @@ function FromComponent({show, handleClose, searchProps, sources}) {
             language: event.target.language.value,
             searchIn: [...event.target.searchIn].filter(input => input.checked).map(input => input.value).join(','),
             pageSize,
-            page: 1
+            page: 1,
+            source: event.target.source.value
         };
 
 
@@ -72,7 +73,7 @@ function FromComponent({show, handleClose, searchProps, sources}) {
                         </Form.Text>
                         <Form.Select name="source" aria-label="Default select example" defaultValue={sources[0]}>
                             {sources.map((value) => (
-                                <option key={value.id} value={value}>{value.name}</option>
+                                <option key={value.id} value={value.id}>{value.name}</option>
                             ))}
                         </Form.Select>
                     </Form.Group>

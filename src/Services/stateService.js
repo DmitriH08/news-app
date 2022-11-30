@@ -12,7 +12,8 @@ const initialState = {
         language: 'ru',
         searchIn: 'title,description,content',
         pageSize,
-        page: 1
+        page: 1,
+        source: 'cnn'
     }
 };
 
