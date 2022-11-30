@@ -26,7 +26,7 @@ function NewsGroupComponent() {
 
 
   useEffect(() => {
-    if (lang && searchParams.language !== lang){S
+    if (lang && searchParams.language !== lang){
       dispatch(setSearchParams({   
         ...searchParams,
         language: lang,
@@ -57,7 +57,10 @@ function NewsGroupComponent() {
   useEffect(() => {
     (async function(){
       try {
+        //tut prihodit object Response iz servera 
         const response = await getSources();
+        // neobhodimie dannie mi poluchaem cherez response.json
+        // a  responseData mi ego konvertiruem v object prislannih dannih s s korotrim rabotaem 
         const responseData = await response.json();
         setSourcesValues(responseData.sources);
       }

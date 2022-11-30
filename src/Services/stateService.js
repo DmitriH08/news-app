@@ -9,7 +9,7 @@ const initialState = {
         q: 'Sport',
         from: moment().format("YYYY-MM-DDT00:00:000"),
         to: moment().format("YYYY-MM-DDT23:59:59.999"),
-        language: 'ru',
+        language: 'en',
         searchIn: 'title,description,content',
         pageSize,
         page: 1,

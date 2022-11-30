@@ -71,7 +71,7 @@ function FromComponent({show, handleClose, searchProps, sources}) {
                         <Form.Text className="text-muted">
                             Advanced search is supported.
                         </Form.Text>
-                        <Form.Select name="source" aria-label="Default select example" defaultValue={sources[0]}>
+                        <Form.Select name="source" aria-label="Default select example" defaultValue={searchProps.source}>
                             {sources.map((value) => (
                                 <option key={value.id} value={value.id}>{value.name}</option>
                             ))}
