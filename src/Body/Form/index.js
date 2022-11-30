@@ -37,11 +37,7 @@ function FromComponent({show, handleClose, searchProps, sources}) {
             language: event.target.language.value,
             searchIn: [...event.target.searchIn].filter(input => input.checked).map(input => input.value).join(','),
             pageSize,
-            page: 1,
-            source: {
-                id: event.target.source.value.id,
-                name: event.target.source.value.name
-            }
+            page: 1
         };
 
 
@@ -76,7 +72,7 @@ function FromComponent({show, handleClose, searchProps, sources}) {
                         </Form.Text>
                         <Form.Select name="source" aria-label="Default select example" defaultValue={sources[0]}>
                             {sources.map((value) => (
-                                <option key={value} value={value}>{value}</option>
+                                <option key={value.id} value={value}>{value.name}</option>
                             ))}
                         </Form.Select>
                     </Form.Group>

@@ -12,8 +12,7 @@ const initialState = {
         language: 'ru',
         searchIn: 'title,description,content',
         pageSize,
-        page: 1,
-        category: 'general'
+        page: 1
     }
 };
 
