@@ -14,7 +14,7 @@ function ContactComponent() {
                         I`m an occupational therapist, who chenged himself career to become a limbs-prosthetic master and after that I`m still changing it trying to become a webdeveloper. I hope it will be my third and last proffesion. 
                     </Card.Text>
                     <Button variant="outline-primary" className="mb-3" >
-                    <Link to = "/contact/School" className="School-link" href ="/School" >School Contact</Link></Button>
+                    <Link to = "/news-app/contact/School" className="School-link" href ="/School" >School Contact</Link></Button>
                 </Card.Body>
             </Card>
         </div>

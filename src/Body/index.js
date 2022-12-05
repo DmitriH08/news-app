@@ -6,16 +6,17 @@ import Row from 'react-bootstrap/Row';
 import FromComponent from './Form';
 import './News.scss'
 import { useDispatch } from 'react-redux';
-import {getEverything, getSources} from '../Services/apiServices';
+import {getEverything, getEverythingDummy,} from '../Services/apiServices';
 import { setErrorMessage,setTotalResults, setSearchParams } from '../Services/stateService';
 import { useSelector } from 'react-redux';
 import { useParams,Link } from 'react-router-dom';
 
-function NewsGroupComponent() {
+function BodyComponent() {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-  const [sourcesValues, setSourcesValues] = useState([]);
+
+  // const [sourcesValues, setSourcesValues] = useState([]);
 
   const [articles, setArticles] = useState([]);
   const dispatch = useDispatch();
@@ -48,27 +49,30 @@ function NewsGroupComponent() {
       }
       catch (error) {
         dispatch(setErrorMessage(error.message));
+        const response = await getEverythingDummy();
+        const responseData = await response.json();
+        setArticles(responseData.articles);
       }
 
     })();
 
   }, [searchParams, dispatch,q,lang,School]);
 
-  useEffect(() => {
-    (async function(){
-      try {
-        //tut prihodit object Response iz servera 
-        const response = await getSources();
-        // neobhodimie dannie mi poluchaem cherez response.json
-        // a  responseData mi ego konvertiruem v object prislannih dannih s s korotrim rabotaem 
-        const responseData = await response.json();
-        setSourcesValues(responseData.sources);
-      }
-      catch (e) {
-        console.log('Error')
-      }
-    })()
-  }, []);
+  // useEffect(() => {
+  //   (async function(){
+  //     try {
+  //       //tut prihodit object Response iz servera 
+  //       const response = await getSources();
+  //       // neobhodimie dannie mi poluchaem cherez response.json
+  //       // a  responseData mi ego konvertiruem v object prislannih dannih s s korotrim rabotaem 
+  //       const responseData = await response.json();
+  //       setSourcesValues(responseData.sources);
+  //     }
+  //     catch (e) {
+  //       console.log('Error')
+  //     }
+  //   })()
+  // }, []);
 
   return (
     <>
@@ -76,7 +80,7 @@ function NewsGroupComponent() {
         Launch
       </Button>
       <Button variant="outline-primary" className="mb-3">
-      <Link to = "/Bitcoin" className="Bitok">Bitok Today</Link></Button>
+      <Link to = "/news-app/Bitcoin" className="Bitok">Bitok Today</Link></Button>
       <Row xs={1} md={2} lg={3} className="g-2">
         {articles.map((article, idx) => (
           <Col key={idx}>
@@ -85,7 +89,7 @@ function NewsGroupComponent() {
         ))}
       </Row>
       <FromComponent
-          sources={sourcesValues}
+          // sources={sourcesValues}
         show={show}
         handleClose={handleClose}
         setArticles={setArticles}
@@ -95,4 +99,4 @@ function NewsGroupComponent() {
   );
 }
 
-export default NewsGroupComponent;
+export default BodyComponent;

@@ -5,14 +5,20 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import DatePicker from 'react-datepicker';
 import moment from 'moment'
+import { getSources } from '../../Services/apiServices'
+import { useEffect } from 'react';
+
 import {setErrorMessage, setSearchParams} from '../../Services/stateService';
 import 'react-datepicker/dist/react-datepicker.css';
 import {useDispatch, useSelector} from 'react-redux';
 
 
-function FromComponent({show, handleClose, searchProps, sources}) {
+function FromComponent({show, handleClose, searchProps, }) {
     const [startDateFrom, setStartDateFrom] = useState(new Date());
     const [startDateTo, setStartDateTo] = useState(new Date());
+
+    const [source,setSources] = useState([]);
+
     const dateFormat = "dd.MM.yyyy";
     const pageSize = useSelector((state) => state.searchParams.pageSize);
     const dispatch = useDispatch();
@@ -39,6 +45,7 @@ function FromComponent({show, handleClose, searchProps, sources}) {
             pageSize,
             page: 1,
             source: event.target.source.value
+            // source: event.target.source.value
         };
 
 
@@ -51,6 +58,20 @@ function FromComponent({show, handleClose, searchProps, sources}) {
         dispatch(setSearchParams(data));
         handleClose();
     }
+    useEffect(() => {  
+        (async function () {
+          try {
+            const response = await getSources();
+            const responseData = await response.json();
+            if (responseData.status === 'error') {
+              throw responseData;
+            }
+            setSources(responseData.sources);
+          } catch (error) {
+            dispatch(setErrorMessage(error.message));
+          }
+        })();
+      }, [setSources, dispatch]);
 
     return (
 
@@ -71,11 +92,13 @@ function FromComponent({show, handleClose, searchProps, sources}) {
                         <Form.Text className="text-muted">
                             Advanced search is supported.
                         </Form.Text>
-                        <Form.Select name="source" aria-label="Default select example" defaultValue={searchProps.source}>
+
+                        {/* <Form.Select name="source" aria-label="Default select example" defaultValue={searchProps.source}>
                             {sources.map((value) => (
                                 <option key={value.id} value={value.id}>{value.name}</option>
                             ))}
-                        </Form.Select>
+                        </Form.Select> */}
+
                     </Form.Group>
                     {['title', 'description', 'content'].map((titleName) => (
                         <div key={`${titleName}`} className="mb-3">
@@ -108,6 +131,16 @@ function FromComponent({show, handleClose, searchProps, sources}) {
                             />
                         </InputGroup>
                     </Form.Group>
+
+                    <Form.Group className="mb-3">
+                        <Form.Label>Select Sources</Form.Label>
+                        <Form.Select name="language" defaultValue={searchProps.source}>
+                            {source.map((source) => (
+                                <option key={source.id} value={source.id}>{source.name}</option>
+                            ))}
+                        </Form.Select>
+                    </Form.Group>
+
                     <Form.Group className="mb-3">
                         <Form.Label>Select Language</Form.Label>
                         <Form.Select name="language" defaultValue={searchProps.language}>
