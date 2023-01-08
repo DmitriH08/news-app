@@ -1,5 +1,6 @@
 
-## Available Scripts
+## Api documentation:
+https://newsapi.org
 
 In the project directory, you can run:
 
@@ -9,7 +10,7 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 Main tools what was used for this app:
-React JS, React-redux, React-router, React-Bootsrap.
+React JS v.18.2.0, React-redux v.8.0, React-Bootsrap v2.6.0, Moment v2.29.4.
 
 This app uses free API for developers with limit of 100  requests , Unfortunately it's impossible to open it in Github Pages, due to API license, only in local server, in spite of deploy.
 
