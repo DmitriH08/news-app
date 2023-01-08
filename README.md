@@ -11,21 +11,24 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+Main tools what was used for this app:
+React JS, React-redux, React-router, React-Bootsrap.
 
-V prilozenii ispolzuetsa besplatnij API dlja razrabotchikov s limitom v 100 zaprosov. Takze on rabotaet tolko na lokal hoste, nesmotrja na deploy. 
+This app uses free API for developers with limit of 100 requiers, Unfortunatily its imposible to open it in Gitgub Pages, due to API license, only in local server, in spite of deploy.
 
-V  razdele Contact/School - kratkaja informacija ob avtore.
-Dlja etogo ispolzovalsa marshrutizator (react-router-dom) v App.js
+In section Contact/School  we have a litle info about author.
+For this was used (react-router-dom) in App.js
 
-V razdele Launch-search, pri vibore konkretnogo istochnika novostej, v Network-Responce budet pokazan tolko vibrannij istochnik, no server  vseravno budet prisilat statji iz drugih novostnih istochnikov ( eto problema v backende)
+In Launch-search section, when choosing a specific news sourc,in Network-Responce will show only choosen source, but server will be send responces from other news sources (due to problem in backend)
 
-Vsja osnovnaja logika prilozenija bila napisanna v Body/Index.js i  v Body/Form/Index.js
+All main logic of this app located in Body/Index.js and Body/Form/Index.js components
 
-Dlja nekotorih componentov v proekte ispolzovalsa react-redux  (Services/stateServices) a takze store -(hraniliwe dannih) bilo dobavlenno v glavnij render vsego proekta (index.js) cherez Provider 
+For some components in project was used react-redux  (Services/stateServices)and Store - (data) was added to main render of hole project (index.js) through Provider
 
-V apiServices ispolzujutsa nodi urlSearchParams dlja kotorih bilo neobhodimo sozdat papku .env v osnovnom dereve proekta.
+In apiServices we use urlSearchParams nodes, for which was necessary create .env file in main structure of project.
 
-Component ErrorModalComponent - otvechaet za oshibki v proekte i pri criticheskom izmenenii v proekte budet vivedena owibka v okne alert
 
-Vosnovnom vse stili bili vzati takze cherez bootstrap i propisanni v scss
+Component ErrorModalComponent - responce for errors. In case of a critical error in the project will be alert messege with error description.
+Mostly, all styles was taken with  bootstrap and written through in SCSS.
+
 
